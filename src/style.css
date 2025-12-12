@@ -1,0 +1,497 @@
+/* Love Letters App - v4.0 - Complete flower garden + envelope text fix */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 50%, #ffe4e6 100%);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.heart-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.beating-heart {
+    animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    10%,
+    30% {
+        transform: scale(1.15);
+    }
+
+    20%,
+    40% {
+        transform: scale(1.05);
+    }
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.dedication {
+    color: #ec4899;
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-style: italic;
+    margin: 10px 0;
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    color: #e9d5ff;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 15px auto;
+}
+
+.day-counter {
+    margin-top: 20px;
+    color: #e9d5ff;
+    font-size: 0.9rem;
+}
+
+.envelopes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.envelope {
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.envelope:not(.locked):hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    filter: brightness(1.05);
+}
+
+.envelope.unlocked {
+    cursor: pointer;
+}
+
+.envelope.unlocked:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(236, 72, 153, 0.3);
+}
+
+.envelope.locked {
+    background: #d1d5db;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.envelope-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.envelope-icon {
+    font-size: 32px;
+}
+
+.envelope-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white !important;
+}
+
+.envelope-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.envelope.unlocked .envelope-title,
+.envelope.unlocked .envelope-subtitle {
+    color: white !important;
+}
+
+.envelope.locked .envelope-title {
+    color: #e9d5ff !important;
+}
+
+.envelope.locked .envelope-subtitle {
+    color: #9ca3af !important;
+}
+
+.heart-small {
+    font-size: 24px;
+}
+
+.footer-quote {
+    margin-top: 60px;
+    text-align: center;
+    color: #e9d5ff;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.letter-view {
+    display: none;
+}
+
+.letter-view.active {
+    display: block;
+}
+
+.letter-card {
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.letter-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    min-height: 400px;
+}
+
+.letter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 30px;
+}
+
+.letter-title-section h2 {
+    font-size: 2rem;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.letter-day {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #e9d5ff;
+}
+
+.letter-text {
+    white-space: pre-line;
+    line-height: 1.8;
+    color: #374151;
+    font-size: 1.1rem;
+}
+
+.letter-heart {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 32px;
+    animation: pulse 2s infinite;
+}
+
+.back-btn-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.back-btn {
+    padding: 15px 30px;
+    background: white;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.game-view {
+    display: none;
+}
+
+.game-view.active {
+    display: block;
+}
+
+.game-card {
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.game-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-header h2 {
+    font-size: 1.8rem;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.game-instructions {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #374151;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Word display grid - supports variable length words */
+.word-display {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.letter-box {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1f2937;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.letter-box.correct {
+    background: #86efac;
+    border-color: #22c55e;
+}
+
+.letter-box.present {
+    background: #fde047;
+    border-color: #eab308;
+}
+
+.letter-box.absent {
+    background: #e5e7eb;
+    border-color: #9ca3af;
+}
+
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 30px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.key {
+    padding: 15px;
+    min-width: 40px;
+    border: none;
+    border-radius: 8px;
+    background: #e5e7eb;
+    color: #374151;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.key:hover {
+    background: #d1d5db;
+    transform: scale(1.05);
+}
+
+.key.wide {
+    min-width: 65px;
+    font-size: 0.85rem;
+}
+
+.key.correct {
+    background: #86efac;
+    color: #166534;
+}
+
+.key.present {
+    background: #fde047;
+    color: #854d0e;
+}
+
+.key.absent {
+    background: #9ca3af;
+    color: #4b5563;
+}
+
+.attempts {
+    text-align: center;
+    margin-top: 20px;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    min-height: 30px;
+}
+
+.message.success {
+    color: #22c55e;
+}
+
+.message.error {
+    color: #ef4444;
+}
+
+.hint-section {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background: #fef3c7;
+    border-radius: 10px;
+    color: #92400e;
+}
+
+.game-back-btn {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.gradient-1 {
+    background: linear-gradient(135deg, #f472b6 0%, #fb7185 100%);
+}
+
+.gradient-2 {
+    background: linear-gradient(135deg, #c084fc 0%, #ec4899 100%);
+}
+
+.gradient-3 {
+    background: linear-gradient(135deg, #f87171 0%, #ec4899 100%);
+}
+
+.gradient-4 {
+    background: linear-gradient(135deg, #fb7185 0%, #ef4444 100%);
+}
+
+.gradient-5 {
+    background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+}
+
+.gradient-6 {
+    background: linear-gradient(135deg, #e879f9 0%, #ec4899 100%);
+}
+
+.gradient-7 {
+    background: linear-gradient(135deg, #ef4444 0%, #ec4899 100%);
+}
+
+@media (max-width: 640px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .envelope {
+        padding: 20px;
+    }
+
+    .letter-content {
+        padding: 25px;
+    }
+
+    .game-content {
+        padding: 25px;
+    }
+
+    .letter-box {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .key {
+        padding: 12px;
+        min-width: 35px;
+        font-size: 0.9rem;
+    }
+}

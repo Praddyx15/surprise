@@ -1,0 +1,15 @@
+{
+  "name": "love-letters-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Interactive love letters web app with Wordle-style puzzles",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "dev": "parcel",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
